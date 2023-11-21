@@ -1,0 +1,18 @@
+{% extends 'inventory/base.html' %}
+
+{% block content %}
+<div>
+	<div class="row">
+		<div class="col-sm-11 col-md-5 mx-auto mt-5 px-3">
+			<h1 class="fw-light">Add and edit all categories and platforms here</h1>
+			<p class="fw-light"> </p>
+
+			<div>
+				<a href="{% url 'categories_inventory' %}" class="btn btn-primary">Inventory Categories</a>
+				<a href="{% url 'edit_category_recipie' %}" class="btn btn-primary">Stock Categories</a>
+				<a href="{% url 'edit_category_sold' %}" class="btn btn-primary">Sales Platforms</a>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

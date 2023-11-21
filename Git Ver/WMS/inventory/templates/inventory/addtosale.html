@@ -1,0 +1,45 @@
+{% extends 'inventory/base.html' %}
+
+{% block content %}
+<a href="{% url 'sold_details' pk %}" class="btn btn-outline-primary my-3 mx-4">Go To Details</a>
+	<div class="row">
+		<div class="col-sm-11 col-md-4 mx-auto mt-5 px-3">
+			<h1 class="fw-light">Choose Items</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-12 mx-auto mt-5">
+
+			<table class="table table-hover table-striped">
+				<thead>
+					<tr>
+						<th scope="col">Name</th>
+						<th scope="col">Qty on Warehouse</th>
+						<th scope="col">Category</th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if items|length == 0 %}
+					<tr>
+						<th scope="row">-</th>
+						<td>-</td>
+						<td>-</td>
+						<td>-</td>
+					</tr>
+					{% endif %}
+
+					{% for item in items %}
+					<tr>
+                        <th class="row">{{ item.name }}</th>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.category.name }}</td>
+                        <td><a href="{% url 'include_into_sale' item.id pk %}" class="btn btn-primary">Add to Sale
+                        </a></td>
+                    </tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock content %}

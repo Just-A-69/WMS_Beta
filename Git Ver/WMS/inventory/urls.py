@@ -1,0 +1,45 @@
+from django.contrib import admin
+from django.urls import path
+from .views import (Index, SignUpView, Dashboard, AddItemInventory, EditItemInventory, DeleteItemInventory, AddToRecipie, DeleteItemStock,
+                    AddNewRecipie, EditRecipie, Stock, increase_recipie, reduce_recipie, include, DeleteItemRecipie,
+                    produce_recipie, SoldItems, DeleteSoldItem, AddNewSale, EditSale, AddToSale, include_into_sale, EditSoldCategory,
+                    EditRecipieCategory, EditInventoryCategory, AllCategories, increase_sale, reduce_sale, DeleteSaleItem,
+                    change_sale_status, InventoryCategories)
+from django.contrib.auth import views as auth_views
+
+urlpatterns = [
+    path('', Index.as_view(), name='index'),
+    path('dashboard/', Dashboard.as_view(), name='dashboard'),
+    path('stock/', Stock.as_view(), name='stock'),
+    path('produce_recipie/<int:item_id>', produce_recipie, name='produce_recipie'),
+    path('increase_recipie/<int:item_id>', increase_recipie, name='increase_recipie'),
+    path('reduce_recipie/<int:item_id>', reduce_recipie, name='reduce_recipie'),
+    path('recipie/<int:pk>', EditRecipie.as_view(), name='recipie'),
+    path('recipie/add/<int:pk>', AddToRecipie.as_view(), name='add_to_recipie'),
+    path('sold/', SoldItems.as_view(), name='sold'),
+    path('sold-details/<int:pk>', EditSale.as_view(), name='sold_details'),
+    path('new-sale/', AddNewSale.as_view(), name='new_sale'),
+    path('sold/add/<int:pk>', AddToSale.as_view(), name='add_to_sale'),
+    path('include_into_sale/<int:item_id>/<int:pk>', include_into_sale, name='include_into_sale'),
+    path('include/<int:item_id>/<int:pk>', include, name='include'),
+    path('increase_sale/<int:item_id>', increase_sale, name='increase_sale'),
+    path('reduce_sale/<int:item_id>', reduce_sale, name='reduce_sale'),
+    path('change_status/<int:item_id>', change_sale_status, name='change_status'),
+    path('add-item/', AddItemInventory.as_view(), name='add-item'),
+    path('edit-item/<int:pk>', EditItemInventory.as_view(), name='edit-item'),
+    path('delete-item/<int:pk>', DeleteItemInventory.as_view(), name='delete-item'),
+    path('add-item-stock/', AddNewRecipie.as_view(), name='add-item-stock'),
+    path('delete-item-stock/<int:pk>', DeleteItemStock.as_view(), name='delete-item-stock'),
+    path('delete-item-recipie/<int:pk>', DeleteItemRecipie.as_view(), name='delete-item-recipie'),
+    path('delete-item-sold/<int:pk>', DeleteSoldItem.as_view(), name='delete-sold-item'),
+    path('delete-item-sale/<int:pk>', DeleteSaleItem.as_view(), name='delete-item-sale'),
+    path('category', AllCategories.as_view(), name='category'),
+    path('edit_category_inventory/<int:item_id>', EditInventoryCategory.as_view(), name='edit_category_inventory'),
+    path('edit_category_recipie', EditRecipieCategory.as_view(), name='edit_category_recipie'),
+    path('edit_category_sold', EditSoldCategory.as_view(), name='edit_category_sold'),
+    path('signup/', SignUpView.as_view(), name='signup'),
+    path('login/', auth_views.LoginView.as_view(template_name='inventory/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='inventory/logout.html'), name='logout'),
+    path('categories_inventory/', InventoryCategories.as_view(), name='categories_inventory'),
+
+]

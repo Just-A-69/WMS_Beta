@@ -1,0 +1,53 @@
+{% extends 'inventory/base.html' %}
+
+{% block content %}
+<a href="{% url 'sold' %}" class="btn btn-outline-primary my-3 mx-4">Go To Sales</a>
+<div class="row">
+		<div class="col-sm-11 col-md-4 mx-auto mt-5 px-3">
+			<h1 class="fw-light">Details of {{ name.name }} Sale</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-12 mx-auto mt-5">
+			<div class="d-flex justify-content-end">
+				<a href="{% url 'add_to_sale' pk %}" class="btn btn-primary">Add Items To Sale</a>
+			</div>
+
+			<table class="table table-hover table-striped">
+				<thead>
+					<tr>
+						<th scope="col">Item</th>
+						<th scope="col">Quantity</th>
+						<th scope="col">Add</th>
+						<th scope="col">Reduce</th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if items|length == 0 %}
+					<tr>
+						<th scope="row">-</th>
+						<td>-</td>
+						<td>-</td>
+						<td>-</td>
+						<td>-</td>
+					</tr>
+					{% endif %}
+
+					{% for item in items %}
+					<tr>
+                        <th class="row">{{ item.get_item_name }}</th>
+                        <td>{{ item.get_item_quantity }}</td>
+                        <td><a href="{% url 'increase_sale' item.id %}" class="btn btn-outline-primary">+1
+                        </a></td>
+                        <td><a href="{% url 'reduce_sale' item.id %}" class="btn btn-outline-secondary">-1
+                        </a></td>
+                        <td><a href="{% url 'delete-item-sale' item.id %}" class="btn btn-outline-secondary">Delete
+                        </a></td>
+                    </tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock content %}
